@@ -119,3 +119,5 @@ dist
 yarn.lock
 
 .DS_STORE
+
+env/development.env

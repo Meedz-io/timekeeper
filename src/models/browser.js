@@ -1,9 +1,9 @@
 const puppeteer = require('puppeteer');
 
 puppeteer.defaultArgs({
-    headless: false, 
+    headless: process.env.NODE_ENV === 'production', 
     args: ['--headless'],
-    userDataDir: "/Applications/Google"
+    userDataDir: process.env.BROWSER_PATH
 });
 
 module.exports = puppeteer;

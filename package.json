@@ -7,10 +7,14 @@
   "private": true,
   "dependencies": {
     "dotenv": "^10.0.0",
+    "path": "^0.12.7",
     "puppeteer": "^10.4.0"
   },
   "scripts": {
-    "dev": "node -r dotenv/config ./src/index.js dotenv_config_path=./env/.env.dev",
-    "start": "node -r dotenv/config ./src/index.js dotenv_config_path=./env/.env"
+    "dev": "set NODE_ENV=development && nodemon ./src/index.js",
+    "prod": "set NODE_ENV=production && node ./src/index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
   }
 }
