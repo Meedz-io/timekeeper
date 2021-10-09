@@ -1,0 +1,11 @@
+{
+  "name": "timekeeper",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "sadiy",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "puppeteer": "^10.4.0"
+  }
+}
