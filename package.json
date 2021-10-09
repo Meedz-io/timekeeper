@@ -6,6 +6,11 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "dotenv": "^10.0.0",
     "puppeteer": "^10.4.0"
+  },
+  "scripts": {
+    "dev": "node -r dotenv/config ./src/index.js dotenv_config_path=./env/.env.dev",
+    "start": "node -r dotenv/config ./src/index.js dotenv_config_path=./env/.env"
   }
 }
