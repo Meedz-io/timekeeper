@@ -8,13 +8,11 @@
   "dependencies": {
     "dotenv": "^10.0.0",
     "path": "^0.12.7",
-    "puppeteer": "^10.4.0"
+    "puppeteer": "^10.4.0",
+    "winston": "^3.3.3"
   },
   "scripts": {
-    "dev": "set NODE_ENV=development && nodemon ./src/index.js",
+    "dev": "docker compose build && docker compose up -d",
     "prod": "set NODE_ENV=production && node ./src/index.js"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.13"
   }
 }

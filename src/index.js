@@ -1,2 +1,5 @@
+require('../env/config.js');
 const puppeteer = require('./models/browser');
-const config =  require('../env/config.js');
+const logger = require('./models/logger');
+
+

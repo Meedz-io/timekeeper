@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  app:
+    build: .
+    environment:
+      - NODE_ENV=development
+    command: npm run dev
+    ports:
+      - "8080:8080"
+    links:
+      - browserless
+    depends_on:
+      - browserless
+  browserless:
+    image: browserless/chrome:latest
+    container_name: "browserless"
+    environment:
+      - DEBUG=browserless/chrome
+      - MAX_CONCURRENT_SESSIONS=10
+    ports:
+        - "3000:3000"
