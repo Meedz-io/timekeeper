@@ -9,8 +9,12 @@ services:
       - "8080:8080"
     links:
       - browserless
+      - mongo
     depends_on:
       - browserless
+      - mongo
+    volumes:
+      - app:/home/app
   browserless:
     image: browserless/chrome:latest
     container_name: "browserless"
@@ -19,3 +23,16 @@ services:
       - MAX_CONCURRENT_SESSIONS=10
     ports:
         - "3000:3000"
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE: "timekeeper"
+    command: [--auth]
+    restart: always
+volumes:
+  app:
+  mongodb:
