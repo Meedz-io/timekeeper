@@ -4,7 +4,7 @@ services:
     build: .
     environment:
       - NODE_ENV=development
-    command: node ./src/index.js
+    command: node ./src/app.js
     ports:
       - "8080:8080"
     links:
@@ -30,7 +30,7 @@ services:
     volumes:
       - mongodb:/data/db
     environment:
-      - MONGO_INITDB_DATABASE: "timekeeper"
+      MONGO_INITDB_DATABASE: "timekeeper"
     command: [--auth]
     restart: always
 volumes:
