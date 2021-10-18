@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('../../lib/db');
 const { Schema } = mongoose;
 
 const ProfileWorkerSchema = new Schema({
@@ -9,6 +9,9 @@ const ProfileWorkerSchema = new Schema({
     profile_url : {
         type: String,
         unique: true
+    },
+    searchCriteria: {
+        type: Object
     },
     created: { type: Date, default: Date.now },
     closedAccount: Boolean

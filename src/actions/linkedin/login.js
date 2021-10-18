@@ -1,5 +1,3 @@
-const puppeteer = require('../../lib/browser'); 
-
 module.exports = async (page) => {
     await page.goto('https://www.linkedin.com', { waitUntil: 'networkidle2' });
     await page.click('[data-control-name="ga-cookie.consent.accept.v3"]')
