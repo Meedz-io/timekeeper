@@ -14,7 +14,7 @@ const ProfileWorkerSchema = new Schema({
         type: Object
     },
     created: { type: Date, default: Date.now },
-    closedAccount: Boolean
+    done: Boolean
 });
 
 module.exports = mongoose.model('Profile_Worker', ProfileWorkerSchema);
