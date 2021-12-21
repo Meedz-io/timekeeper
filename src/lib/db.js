@@ -8,4 +8,6 @@ mongoose.connect(`mongodb://${username}:${password}@${clusterUrl}`, {
     useUnifiedTopology: true
 });
 
+mongoose.connection.on('error', console.error.bind(console, '[MONGODB] Connection error:'));
+
 module.exports = mongoose;

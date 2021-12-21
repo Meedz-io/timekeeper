@@ -2,6 +2,8 @@ module.exports = async (page, account_id) => {
     const profileURL = "https://www.linkedin.com/in/".concat(account_id);
 
 
+    let profileDetails, extraDetails;
+
     try {
 
         await page.goto(profileURL, { waitUntil: 'load' });
@@ -31,7 +33,7 @@ module.exports = async (page, account_id) => {
 
         await page.waitForSelector("#experience-section")
 
-        const profileDetails = {
+        profileDetails = {
             name: await getName(page),
             picture_url: await getProfilePicture(page),
             profile_title: await getProfileTitle(page),
@@ -42,7 +44,7 @@ module.exports = async (page, account_id) => {
             languages: await getLanguageList(page)
         };
 
-        const extraDetails = await getExtraDetails(page)
+        extraDetails = await getExtraDetails(page)
 
         return { ...profileDetails, contact_details: extraDetails };
 

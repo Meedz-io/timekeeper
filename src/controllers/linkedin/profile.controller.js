@@ -1,6 +1,6 @@
 const { launchBrowser } = require('../../lib/browser');
 const getProfile = require('../../actions/linkedin/profile');
-const login = require('../../actions/linkedin/login');
+const { checkAuth } = require('../../actions/linkedin/login');
 const { validationResult } = require('express-validator');
 const Profile = require('../../models/profile.model');
 
@@ -14,9 +14,9 @@ module.exports = async (req, res) => {
     const browser = await launchBrowser();
     const page = await browser.newPage();
 
-    await login(page);
+    await checkAuth(page);
 
-    const url = await newPage.evaluate(() => document.location.href);
+    const url = await page.evaluate(() => document.location.href);
 
     if (url.startsWith('https://www.linkedin.com/feed/')) {
 

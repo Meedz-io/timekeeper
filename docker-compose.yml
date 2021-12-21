@@ -10,9 +10,11 @@ services:
     links:
       - browserless
       - mongo
+      - redis
     depends_on:
       - browserless
       - mongo
+      - redis
     volumes:
       - app:/home/app
   browserless:
@@ -33,6 +35,13 @@ services:
       MONGO_INITDB_DATABASE: "timekeeper"
     command: [--auth]
     restart: always
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis:/data/db
+    ports:
+        - 6379:6379
 volumes:
   app:
   mongodb:
+  redis:
