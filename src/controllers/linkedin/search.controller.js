@@ -68,8 +68,8 @@ const newSearch = async (req, res) => {
         message: 'Searching tasks launched',
         type: taskTypes['S'],
         status: taskStatus['I'],
-        maxResults: maxResults && maxResults,
-        criterias: searchCriteria
+        criterias: maxResults ? [`maxResults=${maxResults}`].concat(searchCriteria) : searchCriteria,
+        startedAt: Date.now()
     }
 
     res.json({
@@ -81,20 +81,22 @@ const newSearch = async (req, res) => {
 
     await browser.close();
 
-    ProfileWorker.find().where('profile_url')
-        .in(searchResults.map(result => result.profile_url))
+    ProfileWorker.find().where('account_id')
+        .in(searchResults.map(result => result.account_id))
         .exec((err, records) => {
+            console.log(records);
             ProfileWorker.insertMany(searchResults
-                .filter(result => !records.some((record) => record.profile_url === result.profile_url))
+                .filter(result => !records.some((record) => record.account_id === result.account_id))
                 .map(result => ({ ...result, searchCriteria, searchId }))
                 , (error, docs) => {
                     cacheStorage.hset('tasks', searchId.toString(), JSON.stringify({
                         message: 'Search is over successfully',
-                        type: 'search',
+                        type: taskTypes['S'],
                         new_profiles: docs.length,
+                        profiles_scrapped: searchResults.length,
                         status: taskStatus['S'],
-                        maxResults: maxResults && maxResults,
-                        criterias: searchCriteria
+                        criterias: maxResults ? [`maxResults=${maxResults}`].concat(searchCriteria) : searchCriteria,
+                        finishedAt: Date.now()
                     }));
                 })
         });

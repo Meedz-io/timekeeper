@@ -10,8 +10,15 @@ const ProfileWorkerSchema = new Schema({
         type: String,
         unique: true
     },
+    account_id : {
+        type: String,
+        unique: true
+    },
     searchCriteria: {
         type: Object
+    },
+    searchId: {
+        type: String
     },
     created: { type: Date, default: Date.now },
     done: Boolean

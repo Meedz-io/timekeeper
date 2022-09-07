@@ -2,11 +2,13 @@ const express = require('express');
 const router = express.Router();
 const { body } = require('express-validator');
 
-const profileController = require('../controllers/linkedin/profile.controller');
+const { extractProfiles, getProfileWorkers } = require('../controllers/linkedin/profile.controller');
 
 router.post('/', [
-    body('accounts').isArray()
+    body('accounts').notEmpty()
         .withMessage('Entrez une liste d\'identifiants valide')
-], profileController);
+], extractProfiles);
+
+router.get('/', getProfileWorkers);
 
 module.exports = router;
